@@ -1,0 +1,33 @@
+name: CodeQL SAST
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # CodeQL SAST job for static code analysiss
+  codeql-sast:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: 'javascript'
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+      - name: Upload CodeQL SARIF Report as Artifact
+        if: always() # Ensure artifact is uploaded even if previous steps fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: codeql-sarif-report
+          path: results.sarif
