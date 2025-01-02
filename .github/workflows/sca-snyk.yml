@@ -2,11 +2,9 @@ name: SCA with Snyk
 
 on:
   push:
-    branches:
-      - master
+    branches: [ main, master ]
   pull_request:
-    branches:
-      - master
+    branches: [ main, master ]
 
 jobs:
   snyk-scan:
