@@ -12,8 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+    services:
+      juice-shop:
+        image: bkimminich/juice-shop:latest
+        options: --publish 3000:3000
 
     steps:
+      - name: Wait for Juice Shop to be ready
+        run: |
+          echo "Waiting for Juice Shop to be available..."
+          until curl --silent --fail http://localhost:3000; do
+            echo "Waiting for Juice Shop..."
+            sleep 5
+          done
+          echo "Juice Shop is ready!"
       - name: Checkout code
         uses: actions/checkout@v3
 
