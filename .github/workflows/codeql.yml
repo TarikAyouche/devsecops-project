@@ -26,6 +26,7 @@ jobs:
             sleep 5
           done
           echo "Juice Shop is ready!"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -34,8 +35,19 @@ jobs:
         with:
           languages: 'javascript'
 
+      - name: Check for CodeQL databases
+        run: |
+          echo "Listing contents of CodeQL directory..."
+          ls -R /github/workspace
+
       - name: Run CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+        continue-on-error: true # Allow failure to get diagnostic output
+
+      - name: Check if SARIF file is generated
+        run: |
+          echo "Checking if SARIF file exists..."
+          ls /github/workspace/results.sarif || echo "No SARIF file found."
 
       - name: Upload CodeQL SARIF Report as Artifact
         if: always() # Ensure artifact is uploaded even if previous steps fail
