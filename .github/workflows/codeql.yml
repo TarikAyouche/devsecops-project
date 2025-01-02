@@ -33,7 +33,7 @@ jobs:
       - name: Set up CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: 'javascript'
+          languages: 'typescript,djavascript'
 
       - name: Check for CodeQL databases
         run: |
