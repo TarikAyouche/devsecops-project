@@ -38,7 +38,8 @@ jobs:
       - name: Check for CodeQL databases
         run: |
           echo "Listing contents of CodeQL directory..."
-          ls -R /github/workspace
+          pwd
+          ls -la
 
       - name: Run CodeQL Analysis
         uses: github/codeql-action/analyze@v2
