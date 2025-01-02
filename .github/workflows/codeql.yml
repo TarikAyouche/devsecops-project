@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  # CodeQL SAST job for static code analysiss
+  # CodeQL SAST job for static code analysis
   codeql-sast:
     runs-on: ubuntu-latest
     permissions:
