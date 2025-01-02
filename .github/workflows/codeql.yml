@@ -38,8 +38,7 @@ jobs:
       - name: Check for CodeQL databases
         run: |
           echo "Listing contents of CodeQL directory..."
-          pwd
-          ls -la
+          touch results.sarif
 
       - name: Run CodeQL Analysis
         uses: github/codeql-action/analyze@v2
@@ -48,7 +47,7 @@ jobs:
       - name: Check if SARIF file is generated
         run: |
           echo "Checking if SARIF file exists..."
-          ls /github/workspace/results.sarif || echo "No SARIF file found."
+          ls /home/runner/work/devsecops-project/devsecops-project/results.sarif || echo "No SARIF file found."
 
       - name: Upload CodeQL SARIF Report as Artifact
         if: always() # Ensure artifact is uploaded even if previous steps fail
