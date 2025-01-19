@@ -1,6 +1,6 @@
 name: Deploy OWASP Juice Shop and Run OWASP ZAP DAST
 
-on:
+#on:
   push:
     branches: [ main, master ]
   pull_request:
